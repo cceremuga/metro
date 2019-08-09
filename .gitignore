@@ -1,0 +1,4 @@
+.vscode/
+.sfdx/
+config/
+force-app/lib/
