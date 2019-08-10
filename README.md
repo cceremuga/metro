@@ -16,13 +16,13 @@ Get these first, you'll need them to use Metro.
 * Salesforce.
 * A penchant for automating everything.
 * Working knowledge of DevOps type stuff.
-* The following third party libraries:
+* The following third party libraries (if you won't want to use our clones in /lib):
   * [fflib-apex-common](https://github.com/financialforcedev/fflib-apex-common)
   * [fflib-apex-mocks](https://github.com/financialforcedev/fflib-apex-mocks)
 
 ## Release Notes
 
-* 8/9/2019
+* 8/10/2019
   * Wow, it's a commit. It doesn't do anything of value yet!
 
 ## License

@@ -5,12 +5,11 @@ private class mtr_ValidationExceptionTest {
         try {
             Test.startTest();
 
-            mtr_ValidationException.throwIfNull(null, 'test');
+            mtr_ValidationException.throwIfNull(null, 'Test');
 
-            System.assert(false, 'No exception was thrown, and we expected one.');
+            mtr_TestUtilities.expectedValidationException();
         } catch (Exception ex) {
-            System.assertEquals('test was expected to have a value, but has a null value.', 
-                    ex.getMessage(), 'Expected the correct exception message.');
+            mtr_TestUtilities.assertValidationException(ex);
         } finally {
             Test.stopTest();
         }
