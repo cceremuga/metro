@@ -1,3 +1,4 @@
 .vscode/
 .sfdx/
 /commands.txt
+assets/server.key
