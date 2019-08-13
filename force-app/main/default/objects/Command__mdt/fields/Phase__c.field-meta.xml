@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phase__c</fullName>
+    <description>The phase for this command to execute during.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The phase for this command to execute during.</inlineHelpText>
+    <label>Phase</label>
+    <referenceTo>CommandPhase__mdt</referenceTo>
+    <relationshipLabel>Commands</relationshipLabel>
+    <relationshipName>Commands</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

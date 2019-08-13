@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Arbitrary blocks of Apex code intended to be run in a specific phase, only one time.</description>
+    <label>Command</label>
+    <pluralLabel>Commands</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

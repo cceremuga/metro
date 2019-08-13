@@ -1,8 +1,30 @@
 /**
  * @description Provides an access point for the execution of commands.
+ * 
+ * MIT License
+ * 
+ * Copyright (c) 2019 Craig Ceremuga
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 public virtual with sharing class mtr_CommandService {
-    @testVisible private static final String POST_DEPLOY_PHASE = 'Post Deploy';
+    @testVisible private static final String POST_DEPLOY_PHASE = 'PostDeployment';
 
     /**
      * @description Use the Instance singleton below.
@@ -28,12 +50,12 @@ public virtual with sharing class mtr_CommandService {
      * @description Runs all configured post-deploy commands which have not been run once.
      *              Then, marks those commands as complete so they are not run in subsequent calls.
      */
-    public void runEligiblePostDeploy() {
-        runEligibleAndMarkComplete(POST_DEPLOY_PHASE);
+    public void runPostDeploy() {
+        runIncompleteAndMarkComplete(POST_DEPLOY_PHASE);
     }
 
-    private void runEligibleAndMarkComplete(String phase) {
-        List<mtr_Command> completed = runEligible(phase);
+    private void runIncompleteAndMarkComplete(String phase) {
+        List<mtr_Command> completed = runIncomplete(phase);
         markAsComplete(completed);
     }
 
@@ -43,8 +65,8 @@ public virtual with sharing class mtr_CommandService {
 
     @testVisible private List<mtr_Command> toRun;
 
-    private List<mtr_Command> runEligible(String phase) {
-        toRun = getEligible(phase);
+    private List<mtr_Command> runIncomplete(String phase) {
+        toRun = getIncomplete(phase);
 
         for (mtr_Command command : toRun) {
             command.Implementation.exec();
@@ -53,7 +75,7 @@ public virtual with sharing class mtr_CommandService {
         return toRun;
     }
 
-    private List<mtr_Command> getEligible(String commandPhase) {
+    private List<mtr_Command> getIncomplete(String commandPhase) {
         List<mtr_Command> commands = new List<mtr_Command>();
 
         // TODO instantiate Command instances based upon retrieved MDT records.
@@ -61,7 +83,7 @@ public virtual with sharing class mtr_CommandService {
         return commands;
     }
 
-    private void getEligibleRecords(String commandPhase) {
+    private void getIncompleteRecords(String commandPhase) {
         // TODO retrive all MDT records which have not been run for the specified phase.
     }
 }
