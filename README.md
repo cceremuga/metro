@@ -2,6 +2,8 @@
 
 Framework tools for supplementing the CI/CD pipeline of your choice on the Salesforce Lightning Platform. 
 
+[![Build Status](https://travis-ci.org/cceremuga/Metro.svg?branch=master)](https://travis-ci.org/cceremuga/Metro)
+
 ## Features
 
 ### Command Runner
