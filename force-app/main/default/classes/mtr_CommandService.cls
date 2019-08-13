@@ -83,7 +83,7 @@ public virtual with sharing class mtr_CommandService {
         return commands;
     }
 
-    private void getIncompleteRecords(String commandPhase) {
-        // TODO retrive all MDT records which have not been run for the specified phase.
+    private List<Command__mdt> getIncompleteRecords(String commandPhase) {
+        return mtr_CommandSelector.newInstance().selectIncompleteByPhase(new Set<String> { commandPhase });
     }
 }
