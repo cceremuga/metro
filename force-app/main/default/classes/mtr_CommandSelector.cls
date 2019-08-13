@@ -59,12 +59,17 @@ public virtual with sharing class mtr_CommandSelector extends fflib_SObjectSelec
         mtr_ValidationException.throwIfNull(phases, PHASES_PARAM);
 
         // TODO, do this.
+        fflib_QueryFactory factory = newQueryFactory(true)
+            .setCondition('Phase__r.DeveloperName IN :phases');
 
-        return new List<Command__mdt>();
+        return (List<Command__mdt>) Database.query(factory.toSOQL());
     }
 
     protected List<Schema.SObjectField> getSObjectFieldList() {
         return new List<Schema.SObjectField> {
+            Command__mdt.ApexClass__c,
+            Command__mdt.DeveloperName,
+            Command__mdt.Id,
             Command__mdt.MasterLabel,
             Command__mdt.Phase__c
         };

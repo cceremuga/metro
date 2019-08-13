@@ -23,12 +23,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-public with sharing class mtr_Command {
-    public mtr_Command() {
+public virtual with sharing class mtr_Command {
+    @testVisible private static final String TO_WRAP_PARAM = 'toWrap';
 
+    private Command__mdt record;
+
+    /**
+     * @description Constructs a command, wrapping the specified record.
+     * @param toWrap The Command__mdt to wrap.
+     * @throws mtr_ValidationException if toWrap is null.
+     */
+    @testVisible
+    protected mtr_Command(Command__mdt toWrap) {
+        mtr_ValidationException.throwIfNull(toWrap, TO_WRAP_PARAM);
+
+        this.record = toWrap;
+        this.Implementation = constructImplementation();
+    }
+
+    /**
+     * @description Constructs a command, wrapping the specified record.
+     * @param toWrap The Command__mdt to wrap.
+     * @throws mtr_ValidationException if toWrap is null.
+     */
+    public static mtr_Command newInstance(Command__mdt toWrap) {
+        return new mtr_Command(toWrap);
+    }
+
+    /**
+     * @description Constructs commands, wrapping the specified records.
+     * @param toWrap The Command__mdt's to wrap.
+     * @throws mtr_ValidationException if toWrap is null.
+     */
+    public static List<mtr_Command> newInstances(List<Command__mdt> toWrap) {
+        List<mtr_Command> commands = new List<mtr_Command>();
+
+        for (Command__mdt commandToWrap : toWrap) {
+            commands.add(new mtr_Command(commandToWrap));
+        }
+
+        return commands;
     }
 
     public mtr_ICommand Implementation { get; private set; }
 
-    // TODO Wrap the MDT record.
+    private mtr_ICommand constructImplementation() {
+        // TODO: Complete this.
+        return null;
+    }
 }

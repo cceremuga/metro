@@ -60,7 +60,7 @@ public virtual with sharing class mtr_CommandService {
     }
 
     private void markAsComplete(List<mtr_Command> completed) {
-        // TODO mark all which were run so they are not run again.
+        // TODO: Mark all which were run so they are not run again.
     }
 
     @testVisible private List<mtr_Command> toRun;
@@ -78,7 +78,7 @@ public virtual with sharing class mtr_CommandService {
     private List<mtr_Command> getIncomplete(String commandPhase) {
         List<mtr_Command> commands = new List<mtr_Command>();
 
-        // TODO instantiate Command instances based upon retrieved MDT records.
+        // TODO: Instantiate Command instances based upon retrieved MDT records.
 
         return commands;
     }
