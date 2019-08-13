@@ -1,0 +1,11 @@
+{
+    "country": "US",
+    "edition": "Developer",
+    "orgPreferences": {
+      "enabled": [
+        "S1DesktopEnabled"
+      ],
+      "disabled": []
+    }
+  }
+  
