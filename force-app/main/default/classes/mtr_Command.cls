@@ -67,7 +67,23 @@ public virtual with sharing class mtr_Command {
         return commands;
     }
 
+    /**
+     * @description The command to execute.
+     */
     public mtr_ICommand Implementation { get; private set; }
+
+    /**
+     * @description Whether or not the command has run.
+     */
+    public Boolean HasRun {
+        get {
+            return this.record.HasRun__c;
+        }
+
+        set {
+            this.record.HasRun__c = value;
+        }
+    }
 
     private mtr_ICommand constructImplementation() {
         String className = this.record.ApexClass__c;

@@ -22,6 +22,10 @@
                 <behavior>Required</behavior>
                 <field>ApexClass__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>HasRun__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

@@ -32,10 +32,16 @@ public virtual with sharing class mtr_CommandSelector extends fflib_SObjectSelec
      */
     @testVisible protected mtr_CommandSelector() { }
 
+    @testVisible private static mtr_CommandSelector mockInstance;
+
     /**
      * @description Constructs an instance of mtr_CommandSelector.
      */
     public static mtr_CommandSelector newInstance() {
+        if (mockInstance != null && Test.isRunningTest()) {
+            return mockInstance;
+        }
+
         return new mtr_CommandSelector();
     }
 
@@ -58,7 +64,6 @@ public virtual with sharing class mtr_CommandSelector extends fflib_SObjectSelec
     public List<Command__mdt> selectIncompleteByPhase(Set<String> phases) {
         mtr_ValidationException.throwIfNull(phases, PHASES_PARAM);
 
-        // TODO, do this.
         fflib_QueryFactory factory = newQueryFactory(true)
             .setCondition('Phase__r.DeveloperName IN :phases');
 

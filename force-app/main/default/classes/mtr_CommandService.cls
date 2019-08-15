@@ -35,7 +35,7 @@ public virtual with sharing class mtr_CommandService {
     /**
      * @description A singleton for interacting with all service methods.
      */
-    public mtr_CommandService Instance {
+    public static mtr_CommandService Instance {
         get {
             if (Instance == null) {
                 Instance = new mtr_CommandService();
@@ -61,6 +61,10 @@ public virtual with sharing class mtr_CommandService {
     }
 
     private void updateAsComplete(List<mtr_Command> completed) {
+        for (mtr_Command completedCommand : completed) {
+            completedCommand.HasRun = true;
+        }
+
         // TODO: Mark all which were run so they are not run again.
     }
 
@@ -78,6 +82,11 @@ public virtual with sharing class mtr_CommandService {
 
     private List<mtr_Command> getIncomplete(String commandPhase) {
         List<Command__mdt> records = getIncompleteRecords(commandPhase);
+
+        if (records.isEmpty()) {
+            return new List<mtr_Command>();
+        }
+
         return mtr_Command.newInstances(records);
     }
 

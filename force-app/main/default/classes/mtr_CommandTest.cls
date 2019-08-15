@@ -91,7 +91,9 @@ private class mtr_CommandTest {
 
     @isTest
     private static void newInstance_withRecord_expectWrapped() {
-        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'mtr_MockCommand');
+        Command__mdt mockCommand = new Command__mdt(
+            ApexClass__c = 'mtr_MockCommand', 
+            HasRun__c = true);
 
         Test.startTest();
         mtr_Command command = mtr_Command.newInstance(mockCommand);
@@ -99,6 +101,7 @@ private class mtr_CommandTest {
 
         System.assertNotEquals(null, command, 'Did not expect a null command.');
         System.assertNotEquals(null, command.Implementation, 'Did not expect a null command.');
+        System.assert(command.HasRun, 'Expected run.');
     }
 
     @isTest

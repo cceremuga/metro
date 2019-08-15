@@ -23,12 +23,12 @@
  */
 @isTest
 public with sharing class mtr_MockCommand implements mtr_ICommand {
-    @testVisible private static Boolean hasRun = false;
+    @testVisible private Boolean hasRun = false;
 
     /**
      * @description Sets hasRun to true for testing purposes.
      */
     public void exec() {
-        hasRun = true;
+        this.hasRun = true;
     }
 }
