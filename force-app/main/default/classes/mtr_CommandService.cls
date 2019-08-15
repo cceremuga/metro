@@ -29,7 +29,8 @@ public virtual with sharing class mtr_CommandService {
     /**
      * @description Use the Instance singleton below.
      */
-    private mtr_CommandService() { }
+    @testVisible
+    protected mtr_CommandService() { }
 
     /**
      * @description A singleton for interacting with all service methods.
@@ -56,10 +57,10 @@ public virtual with sharing class mtr_CommandService {
 
     private void runIncompleteAndMarkComplete(String phase) {
         List<mtr_Command> completed = runIncomplete(phase);
-        markAsComplete(completed);
+        updateAsComplete(completed);
     }
 
-    private void markAsComplete(List<mtr_Command> completed) {
+    private void updateAsComplete(List<mtr_Command> completed) {
         // TODO: Mark all which were run so they are not run again.
     }
 
@@ -76,11 +77,8 @@ public virtual with sharing class mtr_CommandService {
     }
 
     private List<mtr_Command> getIncomplete(String commandPhase) {
-        List<mtr_Command> commands = new List<mtr_Command>();
-
-        // TODO: Instantiate Command instances based upon retrieved MDT records.
-
-        return commands;
+        List<Command__mdt> records = getIncompleteRecords(commandPhase);
+        return mtr_Command.newInstances(records);
     }
 
     private List<Command__mdt> getIncompleteRecords(String commandPhase) {

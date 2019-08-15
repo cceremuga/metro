@@ -31,7 +31,7 @@ public virtual with sharing class mtr_Command {
     /**
      * @description Constructs a command, wrapping the specified record.
      * @param toWrap The Command__mdt to wrap.
-     * @throws mtr_ValidationException if toWrap is null.
+     * @throws mtr_ValidationException if toWrap is null or does not satify construction requirements.
      */
     @testVisible
     protected mtr_Command(Command__mdt toWrap) {
@@ -56,6 +56,8 @@ public virtual with sharing class mtr_Command {
      * @throws mtr_ValidationException if toWrap is null.
      */
     public static List<mtr_Command> newInstances(List<Command__mdt> toWrap) {
+        mtr_ValidationException.throwIfNull(toWrap, TO_WRAP_PARAM);
+
         List<mtr_Command> commands = new List<mtr_Command>();
 
         for (Command__mdt commandToWrap : toWrap) {
@@ -68,7 +70,27 @@ public virtual with sharing class mtr_Command {
     public mtr_ICommand Implementation { get; private set; }
 
     private mtr_ICommand constructImplementation() {
-        // TODO: Complete this.
-        return null;
+        String className = this.record.ApexClass__c;
+
+        if (String.isBlank(className)) {
+            throw new mtr_ValidationException('Apex class cannot be blank.');
+        }
+
+        Type specifiedType = Type.forName(className);
+
+        if (specifiedType == null) {
+            throw new mtr_ValidationException(String.format('Class ({0}) could not be found.', new List<String> {
+                className
+            }));
+        }
+
+        Object instance = specifiedType.newInstance();
+
+        if (!(instance instanceof mtr_ICommand)) {
+            throw new mtr_ValidationException(String.format('Class ({0}) was not an implementation of mtr_ICommand.', 
+                new List<String> { className }));
+        }
+
+        return (mtr_ICommand) instance;
     }
 }

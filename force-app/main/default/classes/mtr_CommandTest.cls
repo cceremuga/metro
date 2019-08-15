@@ -25,21 +25,106 @@
 private class mtr_CommandTest {
     @isTest
     private static void newInstance_nullArgument_expectValidationException() {
-        // TODO: Complete this.
+        try {
+            Test.startTest();
+
+            mtr_Command.newInstance(null);
+
+            mtr_TestUtilities.expectedValidationException();
+        } catch (Exception ex) {
+            mtr_TestUtilities.assertValidationException(ex);
+        } finally {
+            Test.stopTest();
+        }
+    }
+
+    @isTest
+    private static void newInstance_nullApexClass_expectValidationException() {
+        Command__mdt mockCommand = new Command__mdt();
+
+        try {
+            Test.startTest();
+
+            mtr_Command.newInstance(mockCommand);
+
+            mtr_TestUtilities.expectedValidationException();
+        } catch (Exception ex) {
+            mtr_TestUtilities.assertValidationException(ex);
+        } finally {
+            Test.stopTest();
+        }
+    }
+
+    @isTest
+    private static void newInstance_classDoesNotExist_expectValidationException() {
+        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'zzBlahzz');
+
+        try {
+            Test.startTest();
+
+            mtr_Command.newInstance(mockCommand);
+
+            mtr_TestUtilities.expectedValidationException();
+        } catch (Exception ex) {
+            mtr_TestUtilities.assertValidationException(ex);
+        } finally {
+            Test.stopTest();
+        }
+    }
+
+    @isTest
+    private static void newInstance_invalidClassType_expectValidationException() {
+        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'mtr_ValidationException');
+
+        try {
+            Test.startTest();
+
+            mtr_Command.newInstance(mockCommand);
+
+            mtr_TestUtilities.expectedValidationException();
+        } catch (Exception ex) {
+            mtr_TestUtilities.assertValidationException(ex);
+        } finally {
+            Test.stopTest();
+        }
     }
 
     @isTest
     private static void newInstance_withRecord_expectWrapped() {
-        // TODO: Complete this.
+        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'mtr_MockCommand');
+
+        Test.startTest();
+        mtr_Command command = mtr_Command.newInstance(mockCommand);
+        Test.stopTest();
+
+        System.assertNotEquals(null, command, 'Did not expect a null command.');
+        System.assertNotEquals(null, command.Implementation, 'Did not expect a null command.');
     }
 
     @isTest
     private static void newInstances_nullArgument_expectValidationException() {
-        // TODO: Complete this.
+        try {
+            Test.startTest();
+
+            mtr_Command.newInstances(null);
+
+            mtr_TestUtilities.expectedValidationException();
+        } catch (Exception ex) {
+            mtr_TestUtilities.assertValidationException(ex);
+        } finally {
+            Test.stopTest();
+        }
     }
 
     @isTest
-    private static void newInstance_withRecords_expectWrapped() {
-        // TODO: Complete this.
+    private static void newInstances_withRecords_expectWrapped() {
+        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'mtr_MockCommand');
+
+        Test.startTest();
+        List<mtr_Command> commands = mtr_Command.newInstances(new List<Command__mdt> { mockCommand });
+        Test.stopTest();
+
+        System.assertNotEquals(null, commands, 'Did not expect null commands.');
+        System.assertEquals(1, commands.size(), 'Expected one command.');
     }
 }
