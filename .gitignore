@@ -2,3 +2,4 @@
 .sfdx/
 /commands.txt
 assets/server.key
+.DS_Store
