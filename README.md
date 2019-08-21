@@ -24,8 +24,15 @@ Get these first, you'll need them to use Metro.
 
 ## Release Notes
 
-* 8/10/2019
-  * Wow, it's a commit. It doesn't do anything of value yet!
+* 8/21/2019
+  * Basic support for executing commands and logging them to custom settings.
+
+## TODO
+
+* Prevent commands from running more than once.
+* Support async execution via chained queuable.
+* Resilient error handling.
+* Support for additional phases.
 
 ## License
 
