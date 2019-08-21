@@ -22,8 +22,8 @@ before_install:
   --username $USERNAME --setdefaultdevhubusername -a HubOrg
 
 script:
-- sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg --wait 4
-- sfdx force:org:display -u ciorg
-- sfdx force:source:push -u ciorg
-- sfdx force:apex:test:run -u ciorg --wait 10
-- sfdx force:org:delete -u ciorg -p
+- sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a travisci -d 1 --wait 4
+- sfdx force:org:display -u travisci
+- sfdx force:source:push -u travisci
+- sfdx force:apex:test:run -u travisci --wait 10
+- sfdx force:org:delete -u travisci -p

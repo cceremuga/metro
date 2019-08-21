@@ -73,15 +73,24 @@ public virtual with sharing class mtr_Command {
     public mtr_ICommand Implementation { get; private set; }
 
     /**
-     * @description Whether or not the command has run.
+     * @description The label for this command.
      */
-    public Boolean HasRun {
+    public String DeveloperName {
         get {
-            return this.record.mtr_HasRun__c;
+            return this.record.DeveloperName;
         }
+    }
 
-        set {
-            this.record.mtr_HasRun__c = value;
+    /**
+     * @description The phase for this command.
+     */
+    public String Phase {
+        get {
+            if (this.record.mtr_Phase__c == null) {
+                return 'Unknown';
+            }
+
+            return this.record.mtr_Phase__r.DeveloperName;
         }
     }
 

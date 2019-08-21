@@ -61,11 +61,20 @@ public virtual with sharing class mtr_CommandService {
     }
 
     private void updateAsComplete(List<mtr_Command> completed) {
+        fflib_SObjectUnitOfWork work = new fflib_SObjectUnitOfWork(new List<Schema.SObjectType> {
+            mtr_CommandRunLog__c.SObjectType
+        });
+
         for (mtr_Command completedCommand : completed) {
-            completedCommand.HasRun = true;
+            mtr_CommandRunLog runLog = new mtr_CommandRunLog();
+            runLog.Command = completedCommand.DeveloperName;
+            runLog.Phase = completedCommand.Phase;
+            runLog.Log = 'Successful.';
+
+            work.registerNew(runLog.toSObject());
         }
 
-        // TODO: Mark all which were run so they are not run again.
+        work.commitWork();
     }
 
     @testVisible private List<mtr_Command> toRun;

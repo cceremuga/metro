@@ -13,8 +13,8 @@ private class mtr_CommandServiceTest {
     @isTest
     private static void runPostDeploy_withCommands_expectRun() {
         mtr_Command__mdt mockCommand = new mtr_Command__mdt(
-            mtr_ApexClass__c = 'mtr_MockCommand', 
-            mtr_HasRun__c = false);
+            DeveloperName = 'Test',
+            mtr_ApexClass__c = 'mtr_MockCommand');
 
         fflib_ApexMocks mocks = new fflib_ApexMocks();
 
@@ -35,15 +35,19 @@ private class mtr_CommandServiceTest {
 
         mtr_Command runCommand = mtr_CommandService.Instance.toRun[0];
 
-        System.assert(runCommand.HasRun, 'Expected the one command ran.');
-
         mtr_MockCommand actualMockCommand = (mtr_MockCommand) (runCommand.Implementation);
 
         System.assert(actualMockCommand.hasRun, 'Expected executed.');
-    }
 
-    @isTest
-    private static void runPostDeploy_withCommands_expectMarkedAsRun() {
-        // TODO: Complete this.
+        List<mtr_CommandRunLog__c> runLogs = 
+            [SELECT mtr_Command__c, mtr_Phase__c, mtr_Log__c FROM mtr_CommandRunLog__c];
+
+        System.assertEquals(1, runLogs.size(), 'Expected one log.');
+
+        mtr_CommandRunLog__c runLog = runLogs[0];
+
+        System.assertEquals('Test', runLog.mtr_Command__c, 'Expected the correct command.');
+        System.assertEquals('Unknown', runLog.mtr_Phase__c, 'Expected the correct phase.');
+        System.assertEquals('Successful.', runLog.mtr_Log__c, 'Expected the correct log.');
     }
 }
