@@ -69,7 +69,7 @@ private class mtr_CommandSelectorTest {
     @isTest
     private static void selectIncompleteByPhase_withPhases_expectNotNull() {
         Test.startTest();
-        List<Command__mdt> commands = mtr_CommandSelector.newInstance().selectIncompleteByPhase(new Set<String>());
+        List<mtr_Command__mdt> commands = mtr_CommandSelector.newInstance().selectIncompleteByPhase(new Set<String>());
         Test.stopTest();
 
         System.assertNotEquals(null, commands, 'Did not expect null commands.');

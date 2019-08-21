@@ -40,7 +40,7 @@ private class mtr_CommandTest {
 
     @isTest
     private static void newInstance_nullApexClass_expectValidationException() {
-        Command__mdt mockCommand = new Command__mdt();
+        mtr_Command__mdt mockCommand = new mtr_Command__mdt();
 
         try {
             Test.startTest();
@@ -57,7 +57,7 @@ private class mtr_CommandTest {
 
     @isTest
     private static void newInstance_classDoesNotExist_expectValidationException() {
-        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'zzBlahzz');
+        mtr_Command__mdt mockCommand = new mtr_Command__mdt(mtr_ApexClass__c = 'zzBlahzz');
 
         try {
             Test.startTest();
@@ -74,7 +74,7 @@ private class mtr_CommandTest {
 
     @isTest
     private static void newInstance_invalidClassType_expectValidationException() {
-        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'mtr_ValidationException');
+        mtr_Command__mdt mockCommand = new mtr_Command__mdt(mtr_ApexClass__c = 'mtr_ValidationException');
 
         try {
             Test.startTest();
@@ -91,9 +91,9 @@ private class mtr_CommandTest {
 
     @isTest
     private static void newInstance_withRecord_expectWrapped() {
-        Command__mdt mockCommand = new Command__mdt(
-            ApexClass__c = 'mtr_MockCommand', 
-            HasRun__c = true);
+        mtr_Command__mdt mockCommand = new mtr_Command__mdt(
+            mtr_ApexClass__c = 'mtr_MockCommand', 
+            mtr_HasRun__c = true);
 
         Test.startTest();
         mtr_Command command = mtr_Command.newInstance(mockCommand);
@@ -121,10 +121,10 @@ private class mtr_CommandTest {
 
     @isTest
     private static void newInstances_withRecords_expectWrapped() {
-        Command__mdt mockCommand = new Command__mdt(ApexClass__c = 'mtr_MockCommand');
+        mtr_Command__mdt mockCommand = new mtr_Command__mdt(mtr_ApexClass__c = 'mtr_MockCommand');
 
         Test.startTest();
-        List<mtr_Command> commands = mtr_Command.newInstances(new List<Command__mdt> { mockCommand });
+        List<mtr_Command> commands = mtr_Command.newInstances(new List<mtr_Command__mdt> { mockCommand });
         Test.stopTest();
 
         System.assertNotEquals(null, commands, 'Did not expect null commands.');

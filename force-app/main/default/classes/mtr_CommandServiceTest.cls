@@ -12,9 +12,9 @@ private class mtr_CommandServiceTest {
 
     @isTest
     private static void runPostDeploy_withCommands_expectRun() {
-        Command__mdt mockCommand = new Command__mdt(
-            ApexClass__c = 'mtr_MockCommand', 
-            HasRun__c = false);
+        mtr_Command__mdt mockCommand = new mtr_Command__mdt(
+            mtr_ApexClass__c = 'mtr_MockCommand', 
+            mtr_HasRun__c = false);
 
         fflib_ApexMocks mocks = new fflib_ApexMocks();
 
@@ -23,7 +23,7 @@ private class mtr_CommandServiceTest {
 
         mocks.startStubbing();
         mocks.when(mockSelector.selectIncompleteByPhase((Set<String>) fflib_Match.anyObject()))
-            .thenReturn(new List<Command__mdt> { mockCommand });
+            .thenReturn(new List<mtr_Command__mdt> { mockCommand });
         mocks.stopStubbing();
 
         Test.startTest();

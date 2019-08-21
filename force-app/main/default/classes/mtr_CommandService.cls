@@ -81,7 +81,7 @@ public virtual with sharing class mtr_CommandService {
     }
 
     private List<mtr_Command> getIncomplete(String commandPhase) {
-        List<Command__mdt> records = getIncompleteRecords(commandPhase);
+        List<mtr_Command__mdt> records = getIncompleteRecords(commandPhase);
 
         if (records.isEmpty()) {
             return new List<mtr_Command>();
@@ -90,7 +90,7 @@ public virtual with sharing class mtr_CommandService {
         return mtr_Command.newInstances(records);
     }
 
-    private List<Command__mdt> getIncompleteRecords(String commandPhase) {
+    private List<mtr_Command__mdt> getIncompleteRecords(String commandPhase) {
         return mtr_CommandSelector.newInstance().selectIncompleteByPhase(new Set<String> { commandPhase });
     }
 }

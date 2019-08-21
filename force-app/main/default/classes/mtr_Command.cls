@@ -26,7 +26,7 @@
 public virtual with sharing class mtr_Command {
     @testVisible private static final String TO_WRAP_PARAM = 'toWrap';
 
-    private Command__mdt record;
+    private mtr_Command__mdt record;
 
     /**
      * @description Constructs a command, wrapping the specified record.
@@ -34,7 +34,7 @@ public virtual with sharing class mtr_Command {
      * @throws mtr_ValidationException if toWrap is null or does not satify construction requirements.
      */
     @testVisible
-    protected mtr_Command(Command__mdt toWrap) {
+    protected mtr_Command(mtr_Command__mdt toWrap) {
         mtr_ValidationException.throwIfNull(toWrap, TO_WRAP_PARAM);
 
         this.record = toWrap;
@@ -46,7 +46,7 @@ public virtual with sharing class mtr_Command {
      * @param toWrap The Command__mdt to wrap.
      * @throws mtr_ValidationException if toWrap is null.
      */
-    public static mtr_Command newInstance(Command__mdt toWrap) {
+    public static mtr_Command newInstance(mtr_Command__mdt toWrap) {
         return new mtr_Command(toWrap);
     }
 
@@ -55,12 +55,12 @@ public virtual with sharing class mtr_Command {
      * @param toWrap The Command__mdt's to wrap.
      * @throws mtr_ValidationException if toWrap is null.
      */
-    public static List<mtr_Command> newInstances(List<Command__mdt> toWrap) {
+    public static List<mtr_Command> newInstances(List<mtr_Command__mdt> toWrap) {
         mtr_ValidationException.throwIfNull(toWrap, TO_WRAP_PARAM);
 
         List<mtr_Command> commands = new List<mtr_Command>();
 
-        for (Command__mdt commandToWrap : toWrap) {
+        for (mtr_Command__mdt commandToWrap : toWrap) {
             commands.add(new mtr_Command(commandToWrap));
         }
 
@@ -77,16 +77,16 @@ public virtual with sharing class mtr_Command {
      */
     public Boolean HasRun {
         get {
-            return this.record.HasRun__c;
+            return this.record.mtr_HasRun__c;
         }
 
         set {
-            this.record.HasRun__c = value;
+            this.record.mtr_HasRun__c = value;
         }
     }
 
     private mtr_ICommand constructImplementation() {
-        String className = this.record.ApexClass__c;
+        String className = this.record.mtr_ApexClass__c;
 
         if (String.isBlank(className)) {
             throw new mtr_ValidationException('Apex class cannot be blank.');

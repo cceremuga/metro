@@ -50,10 +50,10 @@ public virtual with sharing class mtr_CommandSelector extends fflib_SObjectSelec
      * @param ids The ids to select by.
      * @throws ArgumentNullException if ids is null.
      */
-    public List<Command__mdt> selectById(Set<Id> ids) {
+    public List<mtr_Command__mdt> selectById(Set<Id> ids) {
         mtr_ValidationException.throwIfNull(ids, IDS_PARAM);
 
-        return (List<Command__mdt>) selectSObjectsById(ids);
+        return (List<mtr_Command__mdt>) selectSObjectsById(ids);
     }
 
     /**
@@ -61,26 +61,26 @@ public virtual with sharing class mtr_CommandSelector extends fflib_SObjectSelec
      * @param phases The phases to select by.
      * @throws ArgumentNullException if phases is null.
      */
-    public List<Command__mdt> selectIncompleteByPhase(Set<String> phases) {
+    public List<mtr_Command__mdt> selectIncompleteByPhase(Set<String> phases) {
         mtr_ValidationException.throwIfNull(phases, PHASES_PARAM);
 
         fflib_QueryFactory factory = newQueryFactory(true)
-            .setCondition('Phase__r.DeveloperName IN :phases');
+            .setCondition('mtr_Phase__r.DeveloperName IN :phases');
 
-        return (List<Command__mdt>) Database.query(factory.toSOQL());
+        return (List<mtr_Command__mdt>) Database.query(factory.toSOQL());
     }
 
     protected List<Schema.SObjectField> getSObjectFieldList() {
         return new List<Schema.SObjectField> {
-            Command__mdt.ApexClass__c,
-            Command__mdt.DeveloperName,
-            Command__mdt.Id,
-            Command__mdt.MasterLabel,
-            Command__mdt.Phase__c
+            mtr_Command__mdt.mtr_ApexClass__c,
+            mtr_Command__mdt.DeveloperName,
+            mtr_Command__mdt.Id,
+            mtr_Command__mdt.MasterLabel,
+            mtr_Command__mdt.mtr_Phase__c
         };
     }
     
     protected Schema.SObjectType getSObjectType() {
-        return Command__mdt.sObjectType;
+        return mtr_Command__mdt.sObjectType;
     }
 }
